@@ -14,7 +14,7 @@ const Characters = () => {
   return (
     <div className="Characters">
       {characters.map(character => (
-        <div className="character">
+        <div className="character" key={character.id}>
           <img src={character.image} alt={character.name} />
           <h2>{character.name}</h2>
         </div>
