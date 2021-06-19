@@ -1,0 +1,15 @@
+:root {
+  --borderColor: #545454;
+}
+
+.character {
+  border: 5px solid var(--borderColor);
+  border-radius: 11px;
+  margin: 11px;
+}
+
+.dark {
+  --borderColor: #cccccc;
+  background-color: #545454;
+  color: #cccccc;
+}
