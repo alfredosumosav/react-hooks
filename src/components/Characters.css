@@ -1,5 +1,8 @@
-:root {
-  --borderColor: #545454;
+.Characters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .character {
@@ -8,8 +11,13 @@
   margin: 11px;
 }
 
-.dark {
-  --borderColor: #cccccc;
-  background-color: #545454;
-  color: #cccccc;
+.character img {
+  width: 100%;
+}
+
+.character-details {
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  flex-wrap: wrap;
 }

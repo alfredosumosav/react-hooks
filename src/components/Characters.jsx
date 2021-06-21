@@ -16,7 +16,13 @@ const Characters = () => {
       {characters.map(character => (
         <div className="character" key={character.id}>
           <img src={character.image} alt={character.name} />
-          <h2>{character.name}</h2>
+          <div className="character-details">
+            <h2>{character.name}</h2>
+            <div>{character.status === "Alive" ? "💚" : character.status === "Dead" ? '❤️' : '💙'} {character.status}</div>
+            <div>{character.gender}</div>
+            <div>{character.species}</div>
+            <div><strong>Location:</strong> {character.location.name}</div>
+          </div>
         </div>
       ))}
     </div>
