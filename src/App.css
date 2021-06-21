@@ -1,3 +1,8 @@
+:root {
+  --borderColor: #02203c;
+  color: var(--borderColor);
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +40,23 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.btn {
+  margin: 0 15px;
+  padding: 5px;
+  font-size: 2rem;
+  border: 3px solid #02203c;
+  color: black;
+}
+
+.light {
+  --borderColor: #02203c;
+}
+
+.dark {
+  --borderColor: white;
+  background-color: #02203c;
+  color: white;
+  border-color: white;
 }
