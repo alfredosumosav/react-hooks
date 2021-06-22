@@ -43,9 +43,10 @@ const Characters = () => {
     return setSearch(event.target.value);
   }
 
-  const filteredCharacters = characters.filter(character => {
-    return character.name.toLowerCase().includes(search.toLowerCase());
-  })
+  const filteredCharacters = useMemo(() => {
+    return characters.filter(character =>
+      character.name.toLowerCase().includes(search.toLowerCase()))},
+  [characters, search]);
 
   return (
     <div className="main">
