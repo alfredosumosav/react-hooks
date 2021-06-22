@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useReducer, useMemo, useRef } from 'react'
+import React, { useState, useEffect, useReducer, useMemo, useRef, useCallback } from 'react'
 import './Characters.css'
+import Search from "./Search";
 
 // useReducer
 
@@ -43,9 +44,13 @@ const Characters = () => {
   }
 
   // update search input when change event is detected
-  const handleSearch = () => {
+  // const handleSearch = () => {
+  //   setSearch(searchInput.current.value);
+  // }
+
+  const handleSearch = useCallback(() => {
     setSearch(searchInput.current.value);
-  }
+  }, []);
 
   // filter characters based on search input and memoize using useMemo
   const filteredCharacters = useMemo(() => {
@@ -63,9 +68,9 @@ const Characters = () => {
           </li>
         ))}
       </div>
-      <div className="search">
-        <input type="text" onChange={handleSearch} value={search} ref={searchInput} />
-      </div>
+
+      <Search search={search} searchInput={searchInput} handleSearch={handleSearch} />
+
       <div className="Characters">
         {filteredCharacters.map(character => (
           <div className="character" key={character.id}>
