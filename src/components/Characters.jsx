@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useMemo } from 'react'
+import React, { useState, useEffect, useReducer, useMemo, useRef } from 'react'
 import './Characters.css'
 
 // useReducer
@@ -27,22 +27,27 @@ const Characters = () => {
   const [characters, setCharacters] = useState([]);
   const [favorites, dispatch] = useReducer(favoriteReducer, initialState);
   const [search, setSearch] = useState("");
+  const searchInput = useRef(null);
 
+  // fetch characters data on the first component render
   useEffect(() => {
     fetch('https://rickandmortyapi.com/api/character/')
     .then(response => response.json())
     .then(data => setCharacters(data.results));
   }, []);
 
+  // add character to favorites when "Add to Favorites" button is clicked
   const handleClick = favorite => {
     console.log(favorite)
     dispatch({type: "ADD_TO_FAVORITES", payload: favorite});
   }
 
-  const handleSearch = (event) => {
-    return setSearch(event.target.value);
+  // update search input when change event is detected
+  const handleSearch = () => {
+    setSearch(searchInput.current.value);
   }
 
+  // filter characters based on search input and memoize using useMemo
   const filteredCharacters = useMemo(() => {
     return characters.filter(character =>
       character.name.toLowerCase().includes(search.toLowerCase()))},
@@ -59,7 +64,7 @@ const Characters = () => {
         ))}
       </div>
       <div className="search">
-        <input type="text" onChange={(event) => handleSearch(event)} value={search} />
+        <input type="text" onChange={handleSearch} value={search} ref={searchInput} />
       </div>
       <div className="Characters">
         {filteredCharacters.map(character => (
