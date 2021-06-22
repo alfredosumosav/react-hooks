@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react'
+import React, { useState, useEffect, useReducer, useMemo } from 'react'
 import './Characters.css'
 
 // useReducer
@@ -26,6 +26,7 @@ const favoriteReducer = (state = [], action) => {
 const Characters = () => {
   const [characters, setCharacters] = useState([]);
   const [favorites, dispatch] = useReducer(favoriteReducer, initialState);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     fetch('https://rickandmortyapi.com/api/character/')
@@ -38,17 +39,29 @@ const Characters = () => {
     dispatch({type: "ADD_TO_FAVORITES", payload: favorite});
   }
 
+  const handleSearch = (event) => {
+    return setSearch(event.target.value);
+  }
+
+  const filteredCharacters = characters.filter(character => {
+    return character.name.toLowerCase().includes(search.toLowerCase());
+  })
+
   return (
     <div className="main">
       <div className="favorite-characters">
+        {favorites.favorites.length ? <h3>Favorites</h3> : ""}
         {favorites.favorites.map(favorite => (
           <li key={favorite.id}>
             {favorite.name}
           </li>
         ))}
       </div>
+      <div className="search">
+        <input type="text" onChange={(event) => handleSearch(event)} value={search} />
+      </div>
       <div className="Characters">
-        {characters.map(character => (
+        {filteredCharacters.map(character => (
           <div className="character" key={character.id}>
             <img src={character.image} alt={character.name} />
             <div className="character-details">
