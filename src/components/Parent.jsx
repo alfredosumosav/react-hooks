@@ -1,44 +1,54 @@
-import React from 'react';
-import Counter from "./Counter";
-import Permissions from "./Permissions";
+import React, { useState } from 'react';
 
-class Parent extends React.PureComponent {
-  constructor(props) {
-    super(props);
+const Parent = React.memo(() => {
+  console.log("Render Parent");
 
-    this.state = { count: 1, canEdit: true };
+  const [count, setCount] = useState(1);
+  const [canEdit, setCanEdit] = useState(true);
+
+  const countPlusPlus = () => {
+    console.log("Click to the counter button");
+    setCount(count + 1);
   }
 
-  render() {
-    console.log("Render Parent");
-
-    const toggleCanEdit = () => {
-      console.log('click al boton de toggleCanEdit');
-      this.setState(({ canEdit: oldCanEdit }) => {
-        return { canEdit: !oldCanEdit };
-      });
-    };
-
-    const countPlusPlus = () => {
-      console.log('Click al boton counter');
-
-      this.setState((prevState) => {
-        return { count: prevState.count + 1 };
-      });
-    };
-
-    return (
-      <div>
-        <>
-          <button onClick={countPlusPlus}>Counter + 1</button>
-          <Counter count={this.state.count}/>
-
-          <button onClick={toggleCanEdit}>Toggle Can Edit</button>
-          <Permissions canEdit={this.state.canEdit} />
-        </>
-      </div>
-    )
+  const toggleCanEdit = () => {
+    console.log("Click to the Can Edit Button");
+    setCanEdit(!canEdit);
   }
-}
+
+  return (
+    <>
+      <button onClick={countPlusPlus}>Count + 1</button>
+      <Counter count={count} />
+
+      <button onClick={toggleCanEdit}>Toggle Can Edit</button>
+      <Permissions canEdit={canEdit} />
+    </>
+  )
+})
+
+const Counter = React.memo(({ count }) => {
+  console.log("Render Counter");
+
+  return (
+    <>
+      <form>
+        <p>Count: {count}</p>
+      </form>
+    </>
+  )
+})
+
+const Permissions = React.memo(({ canEdit }) => {
+  console.log("Render Permissions");
+
+  return (
+    <>
+      <form>
+        <p>El usuario {canEdit ? "" : "no"} puede editar...</p>
+      </form>
+    </>
+  )
+})
 
 export default Parent
