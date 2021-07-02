@@ -1,3 +1,9 @@
+// optimizing a react component using React.memo
+// we should not optimize react components by default. we need to remember that
+// optimization comes with costs asociated to its benefits, so it's worth
+// considering if the benefits outweight the costs or if the react component that
+// we need to optimize is going to be called many times.
+
 import React, { useState } from 'react';
 
 const Parent = React.memo(() => {
