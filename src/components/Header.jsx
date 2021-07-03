@@ -9,7 +9,13 @@ const Header = () => {
   const handleClick = () => {
     setDarkMode(!darkMode);
     document.getElementsByTagName('html')[0].classList.toggle('dark');
-    document.getElementById('drkmod-btn').classList.toggle('dark');
+
+    // find all the elements that need to be changed to dark mode and toggle the 'dark' class
+    const elements = document.getElementsByClassName('light');
+    for (let i = 0; i < elements.length; i++) {
+      const element = elements[i];
+      element.classList.toggle('dark');
+    }
   }
 
   return (
