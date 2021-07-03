@@ -36,7 +36,6 @@ const Characters = () => {
 
   // add character to favorites when "Add to Favorites" button is clicked
   const handleClick = favorite => {
-    console.log(favorite)
     dispatch({type: "ADD_TO_FAVORITES", payload: favorite});
   }
 

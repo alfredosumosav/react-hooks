@@ -1,5 +1,6 @@
 :root {
   --borderColor: #02203c;
+  --backgroundColor: white;
   color: var(--borderColor);
 }
 
@@ -42,6 +43,10 @@
   }
 }
 
+#search-icon {
+  fill: var(--borderColor);
+}
+
 .btn {
   margin: 0 15px;
   padding: 5px;
@@ -50,13 +55,10 @@
   color: black;
 }
 
-.light {
-  --borderColor: #02203c;
-}
-
 .dark {
   --borderColor: white;
-  background-color: #02203c;
-  color: white;
-  border-color: white;
+  --backgroundColor: #02203c;
+  color: var(--borderColor);
+  border-color: var(--borderColor);
+  background-color: var(--backgroundColor);
 }
